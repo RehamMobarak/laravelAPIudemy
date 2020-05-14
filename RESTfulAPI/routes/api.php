@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 
 /* Buyers */
 Route::resource('buyers', "Buyer\BuyerController", ['only'=>['index','show']]);
+Route::resource('buyers.transactions', 'Buyer\BuyerTransactionController', ['only' => ['index']]);
+Route::resource('buyers.products', 'Buyer\BuyerProductController', ['only' => ['index']]);
+
 
 /* Sellers */
 Route::resource('sellers', "Seller\SellerController", ['only'=>['index','show']]);
@@ -27,11 +30,16 @@ Route::resource('sellers', "Seller\SellerController", ['only'=>['index','show']]
 /* Products */
 Route::resource('products', "Product\ProductController", ['only'=>['index','show']]);
 
-/* Transactions */
-Route::resource('transactions', "Transaction\TransactionController", ['only'=>['index','show']]);
 
 /* Categories */
 Route::resource('categories', "Category\CategoryController", ['except'=>['create','edit']]);
+
+
+/* Transactions */
+Route::resource('transactions', "Transaction\TransactionController", ['only'=>['index','show']]);
+Route::resource('transactions.categories', 'Transaction\TransactionCategoryController', ['only' => ['index']]);
+Route::resource('transactions.sellers', 'Transaction\TransactionSellerController', ['only' => ['index']]);
+
 
 /* Users */
 Route::resource('users', "User\UserController", ['except'=>['create','edit']]);
