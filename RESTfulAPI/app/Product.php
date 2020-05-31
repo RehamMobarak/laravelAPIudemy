@@ -13,6 +13,7 @@ class Product extends Model
     protected $fillable = ['name','description','quantity', 'status','image','seller_id'];
     use SoftDeletes;
     protected $dates=['deleted_at'];
+    protected $hidden = ['pivot'];
 
     public function isAvailable()
     {

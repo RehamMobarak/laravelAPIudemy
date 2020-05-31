@@ -10,6 +10,7 @@ class Category extends Model
     use SoftDeletes;
     protected $fillable = ['name','description'];
     protected $dates=['deleted_at'];
+    protected $hidden = ['pivot'];
 
     /* RELATIONSHIPS */
 
