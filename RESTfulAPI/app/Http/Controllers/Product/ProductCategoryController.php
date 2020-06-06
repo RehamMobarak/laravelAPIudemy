@@ -33,6 +33,23 @@ class ProductCategoryController extends ApiController
         return $this->showAll($product->categories);
 
     }
+        /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Product $product, Category $category)
+    {
+        if (!$product->categories()->find($category->id)) {
+            return $this->errorResponse("The product doesn't belong to this category",404);
+        }
+
+        $product->categories()->detach($category->id);
+
+        return $this->showAll($product->categories);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -78,14 +95,5 @@ class ProductCategoryController extends ApiController
 
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
-    {
-        //
-    }
+
 }
