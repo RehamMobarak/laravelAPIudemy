@@ -52,7 +52,7 @@ class SellerProductController extends ApiController
         $data = $request->all();
         $data['status'] = Product::UNAVAILABLE_PRODUCT;
         $data['seller_id'] = $seller->id;
-        $data['image'] = '1.jpg';
+        $data['image'] =$request->image->store('');
         $new_product = Product::create($data);
 
         return $this->showOne($new_product);
