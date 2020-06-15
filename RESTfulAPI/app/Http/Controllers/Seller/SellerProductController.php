@@ -7,6 +7,7 @@ use App\Product;
 use App\Seller;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class SellerProductController extends ApiController
@@ -120,8 +121,13 @@ class SellerProductController extends ApiController
         if ($product->isClean()) {
             return $this->errorResponse('must modify values before updating', 422);
         }
-
+       if ($request->hasFile('image')) {
+            Storage::delete($product->image);
+            $product->image = $request->image->store('');
+        }
         $product->save();
+
+ 
 
         return $this->showOne($product);
 
@@ -138,6 +144,7 @@ class SellerProductController extends ApiController
     public function destroy(Seller $seller,Product $product)
     {
         $this->checkSeller($seller,$product);
+        Storage::delete($product->image);
         $product->delete();
         return $this->showOne($product);
 
