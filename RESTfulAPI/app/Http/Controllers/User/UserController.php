@@ -95,4 +95,14 @@ class UserController extends ApiController
             ["data" => $user, 'user deleted', 200]
         );
     }
+
+    public function verify($token)
+    {
+        //find the user whose token is matched with the one sent in request
+        $user = User::where('verification_token', $token)->FirstOrFail();
+        $user->verified = User::VERIFIED_USER;
+        $user->verification_token = null;
+        $user->save();
+        return $this->showVerficationMessage('This account is verified sucessfuly');
+    }
 }
