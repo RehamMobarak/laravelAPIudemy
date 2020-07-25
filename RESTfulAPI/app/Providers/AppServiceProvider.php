@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Mail\UserCreated;
+use App\Mail\UserMailChanged;
 use App\Product;
 use App\User;
 use GuzzleHttp\Handler\Proxy;
@@ -31,17 +32,22 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Product::updated(
-            function(Product $product){
-                if($product->quantity == 0 && $product->isAvailable()){
+            function (Product $product) {
+                if ($product->quantity == 0 && $product->isAvailable()) {
                     $product->status = Product::UNAVAILABLE_PRODUCT;
                     $product->save();
                 };
             }
         );
 
-        User::created(function($user){
+        User::created(function ($user) {
             Mail::to($user->email)->send(new UserCreated($user));
-        }
-        );
+        });
+
+        User::updated(function($user){
+            if($user->isDirty('email')){
+                Mail::to($user)->send(new UserMailChanged($user));
+            }
+        });
     }
 }
