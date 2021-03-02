@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Transformers\UserTransformer;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,6 +13,7 @@ class User extends Authenticatable
 {
     use Notifiable,SoftDeletes;
 
+    public $transformer = UserTransformer::class;
     const VERIFIED_USER='1';
     const UNVERIFIED_USER='0';
 
@@ -54,7 +56,7 @@ class User extends Authenticatable
     {
         $this->attributes['name']=$name;
     }
-    
+
     public function getNameAttribute($name)
     {
         return ucwords($name);
