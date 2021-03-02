@@ -41,8 +41,8 @@ class ProductTransformer extends TransformerAbstract
             'picture' =>url("img/{$product->image}"),
             'seller' =>(int)$product->seller_id,
             'product' =>(int)$product->product_id,
-            'creationDate' =>$product->created_at,
-            'lastChangedDate' =>$product->updated_at,
+            'creationDate' =>(string)$product->created_at,
+            'lastChangedDate' =>(string)$product->updated_at,
             'deletionDate' =>isset($product->deleted_at) ? (String)$product->deleted_at : null,
         ];
     }

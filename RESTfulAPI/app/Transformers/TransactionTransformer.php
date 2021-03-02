@@ -37,8 +37,8 @@ class TransactionTransformer extends TransformerAbstract
             'quantity' =>(int)$transaction->quantity,
             'buyer' =>(int)$transaction->buyer_id,
             'product' =>(int)$transaction->product_id,
-            'creationDate' =>$transaction->created_at,
-            'lastChangedDate' =>$transaction->updated_at,
+            'creationDate' =>(string)$transaction->created_at,
+            'lastChangedDate' =>(string)$transaction->updated_at,
             'deletionDate' =>isset($transaction->deleted_at) ? (String)$transaction->deleted_at : null,
         ];
     }

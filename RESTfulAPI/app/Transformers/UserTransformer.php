@@ -38,8 +38,8 @@ class UserTransformer extends TransformerAbstract
             'email' =>(string)$user->email,
             'isVerified' =>(int)$user->verified,
             'isAdmin' =>($user->admin === 'true'),
-            'creationDate' =>$user->created_at,
-            'lastChangedDate' =>$user->updated_at,
+            'creationDate' =>(string)$user->created_at,
+            'lastChangedDate' =>(string)$user->updated_at,
             'deletionDate' =>isset($user->deleted_at) ? (String)$user->deleted_at : null,
         ];
     }
