@@ -7,6 +7,7 @@ use App\Mail\UserCreated;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+// use App\Transformers\UserTransformer;
 
 class UserController extends ApiController
 {
@@ -21,6 +22,8 @@ class UserController extends ApiController
     public function show(User $user)
     {
         return $this->showOne($user);
+        // $user = User::find(1);
+        // return (new UserTransformer)->transform($user);
     }
 
 

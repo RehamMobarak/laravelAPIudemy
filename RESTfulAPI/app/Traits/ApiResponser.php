@@ -31,4 +31,10 @@ trait ApiResponser
     {
         return $this->successResponse(['data' => $message], $code);
     }
+
+    // protected function transformeData($data,$transformer){
+    //     $transformation = fractal($data, new $transformer);
+
+    //     return $transformation->toArray();
+    // }
 }
