@@ -41,4 +41,16 @@ class CategoryTransformer extends TransformerAbstract
             'deletionDate' =>isset($category->deleted_at) ? (String)$category->deleted_at : null,
         ];
     }
+
+    public static function originalValues($index){
+        $attributes = [
+            'identifier' =>'id',
+            'title' =>'name',
+            'details' =>'description',
+            'creationDate' =>'created_at',
+            'lastChangedDate' =>'updated_at',
+            'deletionDate' => 'deleted_at' ,
+        ];
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }
